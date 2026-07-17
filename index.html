@@ -77,16 +77,13 @@
     
     @keyframes float {
       0% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate(0, 0) scale(1);
       }
-      33% {
-        transform: translate(3vw, 5vh) rotate(120deg);
-      }
-      66% {
-        transform: translate(-2vw, 2vh) rotate(240deg);
+      50% {
+        transform: translate(8vw, 6vh) scale(1.05);
       }
       100% {
-        transform: translate(0, 0) rotate(360deg);
+        transform: translate(0, 0) scale(1);
       }
     }
 
@@ -305,6 +302,241 @@
       border-top: 1px solid var(--border-color-light);
     }
 
+    .footer-dominal {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+    }
+
+    /* INSTAGRAM CARD */
+    .ig-card {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      border: 1px solid var(--border-color-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      background: linear-gradient(135deg, #f9f9f9, #ffffff);
+      width: 100%;
+    }
+    .ig-dp {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-color);
+      padding: 2px;
+    }
+    .ig-info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .ig-username {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-color);
+    }
+    .ig-name {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .ig-bio {
+      font-size: 0.75rem;
+      color: var(--text-color);
+      margin-top: 0.2rem;
+    }
+    .ig-followers {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #666;
+    }
+    .ig-count {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    /* FLOATING INSTAGRAM BUTTON */
+    .floating-ig {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      z-index: 100;
+      transition: all var(--transition-speed) var(--transition-ease);
+      color: var(--text-color);
+    }
+    
+
+
+    /* FLOATING INSTAGRAM BUTTON */
+    .floating-ig {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 55px;
+      height: 55px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
+      color: #FFFFFF;
+    }
+    .floating-ig svg {
+      width: 26px;
+      height: 26px;
+      stroke: #FFFFFF;
+      stroke-width: 1.8;
+      fill: none;
+    }
+    .floating-ig:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(214, 36, 159, 0.4);
+    }
+
+    /* INSTAGRAM REPLICA BOX */
+    .instagram-profile-box {
+      background-color: #FFFFFF;
+      border: 1px solid #DBDBDB;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 440px;
+      margin: 1.5rem auto 3rem auto;
+      padding: 1.25rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #262626;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    
+    .ig-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #EFEFEF;
+      margin-bottom: 1rem;
+    }
+    
+    .ig-back-arrow {
+      color: #262626;
+      display: flex;
+      align-items: center;
+    }
+    
+    .ig-title {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.95rem;
+      gap: 0.25rem;
+    }
+    
+    .ig-username-text {
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .ig-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: #262626;
+    }
+    
+    .ig-body-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .ig-avatar-container {
+      position: relative;
+    }
+    
+    .ig-avatar-gradient {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .ig-avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #FFFFFF;
+      background-color: #FAFAFA;
+    }
+    
+    .ig-stats-container {
+      display: flex;
+      flex: 1;
+      justify-content: space-around;
+      text-align: center;
+    }
+    
+    .ig-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .ig-stat-number {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #262626;
+    }
+    
+    .ig-stat-label {
+      font-size: 0.8rem;
+      color: #8E8E8E;
+      text-transform: lowercase;
+    }
+    
+    .ig-bio-section {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    
+    .ig-profile-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    
+    .ig-bio-text {
+      margin-bottom: 0.1rem;
+      color: #262626;
+    }
+
     .social-link {
       display: inline-flex;
       align-items: center;
@@ -369,6 +601,41 @@
         width: 100%;
       }
     }
+    
+    /* TYPING ANIMATION & TOP STATS */
+    .typing-container {
+      font-size: 1.1rem;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+      min-height: 1.5em;
+      font-weight: 500;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      background-color: var(--accent-color);
+      animation: blink 1s step-end infinite;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    
+    .top-follower-stats {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
+    .animated-number {
+      font-size: 1.25rem;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    .animated-label {
+      font-size: 0.95rem;
+      color: var(--text-color-muted);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -404,8 +671,14 @@
             <h1 class="display-name">Touseef Shaikh</h1>
           </div>
           
-          <!-- COMMENT: Replace brands here -->
-          <p class="tagline">Founder of <strong>Cafe Middle East</strong></p>
+          <!-- Typing Animation & Follower Stats -->
+          <div class="typing-container">
+            <span id="typing-text"></span><span class="cursor">|</span>
+          </div>
+          <div class="top-follower-stats">
+            <span id="top-follower-count" class="animated-number">0</span>
+            <span class="animated-label">Followers on Instagram</span>
+          </div>
           
           <div class="button-group">
             <!-- COMMENT: Replace link targets & text if desired -->
@@ -416,26 +689,188 @@
               <span>Enter Adeeb De CME</span>
             </a>
           </div>
+          
         </div>
 
       </section>
     </div>
   </main>
 
-  <!-- Hub Footer -->
+  <!-- Instagram Profile Replica Card (below main portfolio box) -->
+  <div class="instagram-profile-box">
+    <div class="ig-header">
+      <a href="https://www.instagram.com/touseef_highflyer" target="_blank" rel="noopener noreferrer" class="ig-back-arrow" aria-label="Back">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></line>
+          <polyline points="12 19 5 12 12 5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline>
+        </svg>
+      </a>
+      <div class="ig-title">
+        <span class="ig-username-text">touseef_highflyer</span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="#0095f6" style="vertical-align: middle;">
+          <path d="M12 2c-.6 0-1.1.4-1.3.9l-.5 1.3c-.2.5-.7.9-1.3.9l-1.4.2c-.6.1-1.1.6-1.1 1.2l-.2 1.4c-.1.6-.5 1-1 1.3l-1.3.5c-.6.2-.9.8-.9 1.4l.2 1.4c.1.6.5 1 1 1.3l1.3.5c.5.2.9.7.9 1.3l.2 1.4c.1.6.6 1.1 1.2 1.1l1.4-.2c.6-.1 1 .3 1.3.9l.5 1.3c.2.6.8.9 1.4.9s1.1-.4 1.3-.9l.5-1.3c.2-.5.7-.9 1.3-.9l1.4.2c.6.1 1.1-.4 1.1-1l.2-1.4c.1-.6.5-1 1-1.3l1.3-.5c.6-.2.9-.8.9-1.4l-.2-1.4c-.1-.6-.5-1-1-1.3l-1.3-.5c-.5-.2-.9-.7-.9-1.3l-.2-1.4c-.1-.6-.6-1.1-1.2-1.1l-1.4.2c-.6.1-1-.3-1.3-.9l-.5-1.3c-.2-.6-.8-.9-1.4-.9zm-1.9 12.9l-2.7-2.7 1.4-1.4 1.3 1.3 4.1-4.1 1.4 1.4-5.5 5.5z" />
+        </svg>
+      </div>
+      <div class="ig-header-actions">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+          <circle cx="12" cy="5" r="2.5"></circle>
+          <circle cx="12" cy="12" r="2.5"></circle>
+          <circle cx="12" cy="19" r="2.5"></circle>
+        </svg>
+      </div>
+    </div>
+    
+    <div class="ig-body-row">
+      <div class="ig-avatar-container">
+        <div class="ig-avatar-gradient">
+          <img src="touseef.jpeg" alt="Touseef Shaikh" class="ig-avatar-img" onerror="this.style.display='none';">
+        </div>
+      </div>
+      
+      <div class="ig-stats-container">
+        <div class="ig-stat-item">
+          <span class="ig-stat-number">1,801</span>
+          <span class="ig-stat-label">posts</span>
+        </div>
+        <div class="ig-stat-item">
+          <span class="ig-stat-number" id="follower-count">0</span>
+          <span class="ig-stat-label">followers</span>
+        </div>
+        <div class="ig-stat-item">
+          <span class="ig-stat-number">276</span>
+          <span class="ig-stat-label">following</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ig-bio-section">
+      <h2 class="ig-profile-name">Touseef Shaikh</h2>
+      <p class="ig-bio-text">Founder of Cafe Middle East</p>
+    </div>
+  </div>
+
   <footer>
-    <!-- COMMENT: Replace instagram URL and '[INSTAGRAM HANDLE]' -->
-    <a href="https://instagram.com/touseefshaikh" target="_blank" rel="noopener noreferrer" class="social-link">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-      </svg>
-      <span>@touseefshaikh</span>
+    <a href="https://dominal.in" target="_blank" rel="noopener noreferrer" class="footer-dominal" style="text-decoration: none; gap: 0.25rem;">
+      <span>Built by Dominal</span>
+      <img src="dominallogo.png" alt="Dominal Logo" style="height: 2em; width: auto;">
     </a>
   </footer>
 
+  <!-- Floating Instagram Button -->
+  <a href="https://www.instagram.com/touseef_highflyer" target="_blank" rel="noopener noreferrer" class="floating-ig" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  </a>
+
   <script>
+
+
+    // ANIMATED FOLLOWER COUNTER
+    document.addEventListener('DOMContentLoaded', () => {
+      const counter = document.getElementById('follower-count');
+      if (counter) {
+        let count = 0;
+        const target = 5240;
+        const duration = 2000; // 2 seconds for a premium, fast count
+        const startTime = performance.now();
+        
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function (easeOutExpo)
+          const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          
+          count = Math.floor(easeProgress * target);
+          // Format with comma
+          counter.textContent = count.toLocaleString();
+          
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.textContent = '5,240';
+          }
+        }
+        requestAnimationFrame(updateCount);
+      }
+    });
+
+    // TYPING ANIMATION
+    document.addEventListener('DOMContentLoaded', () => {
+      const textElement = document.getElementById('typing-text');
+      const cursor = document.querySelector('.cursor');
+      if (!textElement) return;
+      const phrases = ["Hello.", "I am Touseef Shaikh.", "Founder of Cafe Middle East."];
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let delay = 100;
+
+      function type() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isDeleting) {
+          textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+          charIndex--;
+          delay = 40;
+        } else {
+          textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+          charIndex++;
+          delay = 70;
+        }
+
+        if (!isDeleting && charIndex === currentPhrase.length) {
+          if (phraseIndex === phrases.length - 1) {
+            cursor.style.animation = 'none';
+            cursor.style.opacity = '1';
+            return; // Stop after last phrase and keep cursor solid
+          }
+          delay = 1200;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          phraseIndex++;
+          delay = 400;
+        }
+        setTimeout(type, delay);
+      }
+      setTimeout(type, 800);
+    });
+
+    // TOP FOLLOWER COUNTER
+    document.addEventListener('DOMContentLoaded', () => {
+      const counter = document.getElementById('top-follower-count');
+      if (counter) {
+        let count = 0;
+        const target = 5000;
+        const duration = 2000;
+        const startTime = performance.now();
+        
+        function updateCount(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          
+          count = Math.floor(easeProgress * target);
+          counter.textContent = count.toLocaleString() + '+';
+          
+          if (progress < 1) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.textContent = '5,000+';
+          }
+        }
+        requestAnimationFrame(updateCount);
+      }
+    });
+
     // 3D TILT INTERACTION (Desktop Only)
     document.addEventListener('DOMContentLoaded', () => {
       const card = document.querySelector('.depth-card');
