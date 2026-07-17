@@ -540,7 +540,9 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.1;
+        renderer.toneMappingExposure = 1.5; // Increased exposure
+        renderer.outputEncoding = THREE.sRGBEncoding; // Fixes dark GLTF rendering
+
         container.appendChild(renderer.domElement);
 
         // 4. OrbitControls setup
@@ -557,16 +559,16 @@
         controls.enabled = false;
 
         // 5. Studio Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 2.0); // Brighter ambient
         scene.add(ambientLight);
 
         // Main key directional light
-        const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
         mainLight.position.set(4, 8, 15);
         scene.add(mainLight);
 
         // Soft back fill light for edge highlights
-        const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        const backLight = new THREE.DirectionalLight(0xffffff, 1.0);
         backLight.position.set(-4, -2, -6);
         scene.add(backLight);
 
