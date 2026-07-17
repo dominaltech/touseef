@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Hub | Touseef Shaikh</title>
+  <meta name="description" content="Personal portfolio and brand hub for Touseef Shaikh, founder of Cafe Middle East.">
+  
+  <!-- Modern grotesque Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* DESIGN TOKENS */
+    :root {
+      --bg-color: #FFFFFF;
+      --text-color: #111111;
+      --accent-color: #D91E1E; /* Deep executive red */
+      --border-color: #111111;
+      --border-color-light: #E0E0E0;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --transition-speed: 0.3s;
+      --transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth physical ease */
+    }
+
+    /* BACKGROUND CREATIVITY / SLIDE ANIMATION */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -10;
+      overflow: hidden;
+      pointer-events: none;
+      background: #FFFFFF;
+    }
+    
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.08;
+      animation: float 25s infinite ease-in-out;
+    }
+    
+    .bg-shape-1 {
+      width: 40vw;
+      height: 40vw;
+      background-color: var(--accent-color);
+      top: -10vw;
+      left: -10vw;
+      animation-duration: 25s;
+    }
+    
+    .bg-shape-2 {
+      width: 50vw;
+      height: 50vw;
+      background-color: #D0D0D0;
+      bottom: -15vw;
+      right: -15vw;
+      animation-delay: -5s;
+      animation-duration: 32s;
+    }
+    
+    .bg-shape-3 {
+      width: 30vw;
+      height: 30vw;
+      background-color: var(--accent-color);
+      top: 35vh;
+      left: 65vw;
+      animation-delay: -12s;
+      animation-duration: 20s;
+      opacity: 0.04;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      33% {
+        transform: translate(3vw, 5vh) rotate(120deg);
+      }
+      66% {
+        transform: translate(-2vw, 2vh) rotate(240deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    /* BASE RESET */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 2rem 0;
+    }
+
+    /* DEPTH CARD WRAPPER */
+    .depth-card-container {
+      perspective: 1200px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* THE CARD */
+    .depth-card {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06), 0 5px 15px rgba(0, 0, 0, 0.03);
+      padding: 3rem;
+      max-width: 860px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 3.5rem;
+      align-items: center;
+      transform-style: preserve-3d;
+      transition: box-shadow 0.4s var(--transition-ease), transform 0.4s var(--transition-ease);
+    }
+
+    /* IMAGE FRAME & FALLBACK */
+    .image-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/5;
+      border: 1px solid var(--accent-color);
+      background-color: #F5F5F5;
+      overflow: hidden;
+      transform: translateZ(20px); /* 3D layer lift */
+    }
+
+    .image-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #F0F0F0;
+      color: #888888;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .image-frame img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.5s var(--transition-ease);
+    }
+
+    .image-frame img.loaded {
+      opacity: 1;
+    }
+
+    /* CARD CONTENT */
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transform: translateZ(35px); /* Stronger 3D lift for typography */
+    }
+
+    /* TYPOGRAPHY */
+    .name-container {
+      display: flex;
+      align-items: stretch;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .red-rule {
+      width: 1.5px;
+      background-color: var(--accent-color);
+      flex-shrink: 0;
+    }
+
+    .display-name {
+      font-weight: 200; /* Extra light / thin */
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--text-color);
+    }
+
+    .tagline {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-weight: 400;
+      line-height: 1.6;
+      color: #555555;
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .tagline strong {
+      font-weight: 600;
+      color: var(--text-color);
+    }
+
+    /* BUTTONS SECTION */
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .nav-button {
+      position: relative;
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.85rem 1.5rem;
+      border: 1px solid var(--border-color);
+      background-color: transparent;
+      color: var(--text-color);
+      font-family: var(--font-family);
+      font-weight: 500;
+      font-size: 0.8rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      overflow: hidden;
+      z-index: 1;
+      transition: border-color var(--transition-speed) var(--transition-ease),
+                  color var(--transition-speed) var(--transition-ease),
+                  transform var(--transition-speed) var(--transition-ease),
+                  box-shadow var(--transition-speed) var(--transition-ease);
+    }
+
+    /* Slide in fill */
+    .nav-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -101%;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-color);
+      z-index: -1;
+      transition: left var(--transition-speed) var(--transition-ease);
+    }
+
+    .nav-button:hover::before {
+      left: 0;
+    }
+
+    .nav-button:hover {
+      border-color: var(--accent-color);
+      color: #FFFFFF;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(217, 30, 30, 0.15);
+    }
+
+    /* FOOTER */
+    footer {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border-color-light);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      transition: color var(--transition-speed) var(--transition-ease);
+    }
+
+    .social-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text-color);
+      stroke-width: 1.2px;
+      fill: none;
+      transition: stroke var(--transition-speed) var(--transition-ease);
+    }
+
+    .social-link:hover {
+      color: var(--accent-color);
+    }
+
+    .social-link:hover svg {
+      stroke: var(--accent-color);
+    }
+
+    /* RESPONSIVE LAYOUTS */
+    @media (max-width: 820px) {
+      body {
+        padding: 1.5rem;
+      }
+
+      main {
+        margin: 1rem 0;
+      }
+
+      .depth-card {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 2rem;
+        max-width: 480px;
+      }
+
+      .image-frame {
+        transform: none; /* Disable 3D translation */
+      }
+
+      .card-content {
+        transform: none;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .nav-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Elegant background animation elements -->
+  <div class="bg-animation">
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+  </div>
+
+  <!-- Landing Hub Main Content -->
+  <main>
+    <div class="depth-card-container">
+      <section class="depth-card">
+        
+        <!-- Executive Photo with fallbacks -->
+        <!-- COMMENT: Replace 'touseef.jpeg' with actual portrait image file name -->
+        <div class="image-frame">
+          <div class="image-fallback">
+            <span>Touseef Shaikh</span>
+            <span style="font-size: 0.65rem; margin-top: 0.5rem; opacity: 0.6;">Portrait Placeholder</span>
+          </div>
+          <img src="touseef.jpeg" alt="Touseef Shaikh Portrait" onload="this.classList.add('loaded')" onerror="this.style.display='none';">
+        </div>
+
+        <!-- Executive Identification & Navigation Hub -->
+        <div class="card-content">
+          <!-- Masthead-style title -->
+          <div class="name-container">
+            <span class="red-rule"></span>
+            <!-- COMMENT: Replace '[PERSON NAME]' with executive name -->
+            <h1 class="display-name">Touseef Shaikh</h1>
+          </div>
+          
+          <!-- COMMENT: Replace brands here -->
+          <p class="tagline">Founder of <strong>Cafe Middle East</strong></p>
+          
+          <div class="button-group">
+            <!-- COMMENT: Replace link targets & text if desired -->
+            <a href="cafe.html" class="nav-button">
+              <span>Enter Cafe Middle East</span>
+            </a>
+            <a href="perfume.html" class="nav-button">
+              <span>Enter Adeeb De CME</span>
+            </a>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- Hub Footer -->
+  <footer>
+    <!-- COMMENT: Replace instagram URL and '[INSTAGRAM HANDLE]' -->
+    <a href="https://instagram.com/touseefshaikh" target="_blank" rel="noopener noreferrer" class="social-link">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+      <span>@touseefshaikh</span>
+    </a>
+  </footer>
+
+  <script>
+    // 3D TILT INTERACTION (Desktop Only)
+    document.addEventListener('DOMContentLoaded', () => {
+      const card = document.querySelector('.depth-card');
+      const container = document.querySelector('.depth-card-container');
+      
+      // Perform feature check for fine pointing devices (mouse)
+      const hasHover = window.matchMedia('(hover: hover)').matches;
+
+      if (card && container && hasHover) {
+        container.addEventListener('mousemove', (e) => {
+          const rect = container.getBoundingClientRect();
+          // Relative position from center of container (pixels)
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          // Max rotation angles (degrees)
+          const maxTiltX = 3.5;
+          const maxTiltY = 3.5;
+          
+          // Calculate percentage rotation (-1 to 1 range)
+          const pctX = y / (rect.height / 2);
+          const pctY = x / (rect.width / 2);
+          
+          const tiltX = (pctX * -maxTiltX).toFixed(2);
+          const tiltY = (pctY * maxTiltY).toFixed(2);
+          
+          // Apply transform
+          card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+          
+          // Dynamic shadow deepening based on tilt extent
+          const tiltFactor = Math.sqrt(pctX*pctX + pctY*pctY);
+          const shadowSpread = Math.min(30 + tiltFactor * 15, 45);
+          const shadowOpacity = Math.min(0.06 + tiltFactor * 0.05, 0.12);
+          card.style.boxShadow = `0 ${15 + tiltFactor*10}px ${shadowSpread}px rgba(0, 0, 0, ${shadowOpacity}), 0 5px 15px rgba(0, 0, 0, 0.03)`;
+        });
+        
+        container.addEventListener('mouseleave', () => {
+          // Smoothly animate back to center rest
+          card.style.transition = 'transform 0.5s var(--transition-ease), box-shadow 0.5s var(--transition-ease)';
+          card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          card.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.06), 0 5px 15px rgba(0, 0, 0, 0.03)';
+        });
+        
+        container.addEventListener('mouseenter', () => {
+          // Remove transition for crisp real-time tracking
+          card.style.transition = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

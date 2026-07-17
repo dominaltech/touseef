@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfume Brand | Adeeb De CME</title>
+  <meta name="description" content="Explore Adeeb De CME, an exclusive perfume line curated by Touseef Shaikh.">
+  
+  <!-- Modern grotesque Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* DESIGN TOKENS (identical to index.html & cafe.html for visual consistency) */
+    :root {
+      --bg-color: #FFFFFF;
+      --text-color: #111111;
+      --accent-color: #D91E1E; /* Deep executive red */
+      --border-color: #111111;
+      --border-color-light: #E0E0E0;
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --transition-speed: 0.3s;
+      --transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* BACKGROUND CREATIVITY / SLIDE ANIMATION */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -10;
+      overflow: hidden;
+      pointer-events: none;
+      background: #FFFFFF;
+    }
+    
+    .bg-shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.08;
+      animation: float 25s infinite ease-in-out;
+    }
+    
+    .bg-shape-1 {
+      width: 40vw;
+      height: 40vw;
+      background-color: var(--accent-color);
+      top: -10vw;
+      left: -10vw;
+      animation-duration: 25s;
+    }
+    
+    .bg-shape-2 {
+      width: 50vw;
+      height: 50vw;
+      background-color: #D0D0D0;
+      bottom: -15vw;
+      right: -15vw;
+      animation-delay: -5s;
+      animation-duration: 32s;
+    }
+    
+    .bg-shape-3 {
+      width: 30vw;
+      height: 30vw;
+      background-color: var(--accent-color);
+      top: 35vh;
+      left: 65vw;
+      animation-delay: -12s;
+      animation-duration: 20s;
+      opacity: 0.04;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      33% {
+        transform: translate(3vw, 5vh) rotate(120deg);
+      }
+      66% {
+        transform: translate(-2vw, 2vh) rotate(240deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    /* BASE RESET */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* HEADER & NAV */
+    header {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color-light);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      transition: color var(--transition-speed) var(--transition-ease);
+    }
+
+    .back-link svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-color);
+      stroke-width: 1.5px;
+      fill: none;
+      transition: stroke var(--transition-speed) var(--transition-ease),
+                  transform var(--transition-speed) var(--transition-ease);
+    }
+
+    .back-link:hover {
+      color: var(--accent-color);
+    }
+
+    .back-link:hover svg {
+      stroke: var(--accent-color);
+      transform: translateX(-4px);
+    }
+
+    .wordmark {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      margin: 3rem 0;
+    }
+
+    /* 3D VIEWER CONTAINER */
+    .viewer-container {
+      position: relative;
+      width: 100%;
+      height: clamp(350px, 60vh, 520px);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-color);
+      margin-bottom: 4rem;
+      overflow: hidden;
+    }
+
+    #canvas-holder {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+
+    #canvas-holder:active {
+      cursor: grabbing;
+    }
+
+    /* LOADING & ERROR STATES */
+    .viewer-loader, .viewer-error {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      background-color: #FFFFFF;
+      transition: opacity 0.5s var(--transition-ease);
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid var(--border-color-light);
+      border-top-color: var(--accent-color);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #777777;
+      font-weight: 500;
+    }
+
+    .viewer-error {
+      color: var(--text-color);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .viewer-error svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--accent-color);
+      stroke-width: 1.5px;
+      fill: none;
+      margin-bottom: 1rem;
+    }
+
+    .viewer-error p {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .viewer-error .error-subtext {
+      font-size: 0.7rem;
+      color: #888888;
+      margin-top: 0.5rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* PRODUCT GRID */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      width: 100%;
+      align-items: end;
+    }
+
+    .product-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* PRODUCT IMAGE FRAME & FALLBACK */
+    .product-image-frame {
+      position: relative;
+      width: 100%;
+      border: none;
+      transition: transform var(--transition-speed) var(--transition-ease);
+    }
+
+    .image-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #F0F0F0;
+      color: #888888;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .product-image-frame img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      opacity: 0;
+      z-index: 2;
+      transition: opacity 0.5s var(--transition-ease);
+    }
+
+    .product-image-frame img.loaded {
+      opacity: 1;
+    }
+
+    /* HOVER STATE (Desktop Only) */
+    @media (hover: hover) {
+      .product-item:hover .product-image-frame {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border-color-light);
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      transition: color var(--transition-speed) var(--transition-ease);
+    }
+
+    .social-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text-color);
+      stroke-width: 1.2px;
+      fill: none;
+      transition: stroke var(--transition-speed) var(--transition-ease);
+    }
+
+    .social-link:hover {
+      color: var(--accent-color);
+    }
+
+    .social-link:hover svg {
+      stroke: var(--accent-color);
+    }
+
+    /* RESPONSIVE LAYOUTS */
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 1.5rem;
+      }
+
+      main {
+        margin: 2rem 0;
+      }
+
+      .viewer-container {
+        height: 380px;
+        margin-bottom: 2.5rem;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Elegant background animation elements -->
+  <div class="bg-animation">
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header>
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      <span>Back</span>
+    </a>
+    <!-- COMMENT: Replace with Perfume Brand wordmark -->
+    <div class="wordmark">Adeeb De CME</div>
+  </header>
+
+  <!-- Perfume Brand Page Main Content -->
+  <main>
+    
+    <!-- 3D Perfume Bottle Viewer -->
+    <div class="viewer-container">
+      <!-- Loading state -->
+      <div id="canvas-loader" class="viewer-loader">
+        <div class="spinner"></div>
+        <span class="loader-text">Loading 3D Atmosphere...</span>
+      </div>
+
+      <!-- Graceful loading fail notification (remains hidden unless GLB fails to load) -->
+      <div id="canvas-error" class="viewer-error" style="display: none;">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <p>Interactive 3D Preview</p>
+        <p class="error-subtext">A structural wireframe is rendering. Please place <strong>3dmodel1.glb</strong> in the root folder to display the full material.</p>
+      </div>
+
+      <!-- Three.js Canvas Holder -->
+      <div id="canvas-holder"></div>
+    </div>
+
+    <!-- Product Showcase Grid (Exactly 4 Items) -->
+    <section class="product-grid">
+
+      <!-- Product 1 -->
+      <div class="product-item">
+        <!-- COMMENT: No border, no captions, keeps native image size as is -->
+        <div class="product-image-frame" id="frame-1" style="aspect-ratio: 1/1; background-color: #F5F5F5;">
+          <div class="image-fallback" id="fallback-1">
+            <span>Adeeb Blue</span>
+            <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
+          </div>
+          <img src="perfume_blue.png" alt="Adeeb Blue product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-1').style.display='none'; document.getElementById('frame-1').style.aspectRatio='auto'; document.getElementById('frame-1').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-item">
+        <!-- COMMENT: No border, no captions, keeps native image size as is -->
+        <div class="product-image-frame" id="frame-2" style="aspect-ratio: 1/1; background-color: #F5F5F5;">
+          <div class="image-fallback" id="fallback-2">
+            <span>Adeeb Green</span>
+            <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
+          </div>
+          <img src="perfume_green.png" alt="Adeeb Green product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-2').style.display='none'; document.getElementById('frame-2').style.aspectRatio='auto'; document.getElementById('frame-2').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-item">
+        <!-- COMMENT: No border, no captions, keeps native image size as is -->
+        <div class="product-image-frame" id="frame-3" style="aspect-ratio: 1/1; background-color: #F5F5F5;">
+          <div class="image-fallback" id="fallback-3">
+            <span>Adeeb Red</span>
+            <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
+          </div>
+          <img src="perfume_red.png" alt="Adeeb Red product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-3').style.display='none'; document.getElementById('frame-3').style.aspectRatio='auto'; document.getElementById('frame-3').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-item">
+        <!-- COMMENT: No border, no captions, keeps native image size as is -->
+        <div class="product-image-frame" id="frame-4" style="aspect-ratio: 1/1; background-color: #F5F5F5;">
+          <div class="image-fallback" id="fallback-4">
+            <span>Adeeb Red 2</span>
+            <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
+          </div>
+          <img src="perfume_red2.png" alt="Adeeb Red 2 product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-4').style.display='none'; document.getElementById('frame-4').style.aspectRatio='auto'; document.getElementById('frame-4').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Perfume Footer -->
+  <footer>
+    <!-- COMMENT: Replace instagram URL and handle -->
+    <a href="https://instagram.com/touseefshaikh" target="_blank" rel="noopener noreferrer" class="social-link">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+      <span>@touseefshaikh</span>
+    </a>
+  </footer>
+
+  <!-- CDN scripts for Three.js, GLTFLoader and OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <script>
+    // 3D VIEWER SYSTEM WITH INTRO SETTLE ANIMATION AND DRIFT CONTROLS
+    document.addEventListener('DOMContentLoaded', () => {
+      let scene, camera, renderer, controls, model;
+      let settleStartTime = null;
+      let animationFrameId;
+      let isSettling = true;
+      const settleDuration = 3200; // 3.2 seconds duration for exactly 2 turns auto-rotation
+
+      const container = document.getElementById('canvas-holder');
+      const loaderEl = document.getElementById('canvas-loader');
+      const errorEl = document.getElementById('canvas-error');
+
+      function init() {
+        // 1. Scene setup
+        scene = new THREE.Scene();
+        scene.background = null; // Let the transparent renderer show clean HTML #FFFFFF
+
+        // 2. Camera setup
+        const aspect = container.clientWidth / container.clientHeight;
+        camera = new THREE.PerspectiveCamera(40, aspect, 0.1, 100);
+        camera.position.set(0, 0.2, 4.2); // Position camera slightly above center
+
+        // 3. Renderer setup
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.1;
+        container.appendChild(renderer.domElement);
+
+        // 4. OrbitControls setup
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.enableZoom = false; // Prevent unwanted zooming while scrolling the page
+        
+        // Limits to prevent flipping model upside down
+        controls.minPolarAngle = Math.PI / 3; // Limit vertical tilt upwards
+        controls.maxPolarAngle = Math.PI * 2 / 3; // Limit vertical tilt downwards
+        
+        // Disable controls immediately during the auto-rotation settle phase
+        controls.enabled = false;
+
+        // 5. Studio Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+
+        // Main key directional light
+        const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        mainLight.position.set(4, 8, 15);
+        scene.add(mainLight);
+
+        // Soft back fill light for edge highlights
+        const backLight = new THREE.DirectionalLight(0xffffff, 0.4);
+        backLight.position.set(-4, -2, -6);
+        scene.add(backLight);
+
+        // 6. Loading Model File
+        const loader = new THREE.GLTFLoader();
+        
+        // COMMENT: Make sure '3dmodel1.glb' is loaded. If it's missing, the loader triggers error callback.
+        loader.load(
+          '3dmodel1.glb',
+          function (gltf) {
+            model = gltf.scene;
+
+            // Normalize model sizing and position
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            // Center geometry pivot point
+            model.position.x += (model.position.x - center.x);
+            model.position.y += (model.position.y - center.y);
+            model.position.z += (model.position.z - center.z);
+
+            // Scale to proportional viewer size
+            const maxDimension = Math.max(size.x, size.y, size.z);
+            const targetHeight = 1.8; 
+            const scaleFactor = targetHeight / maxDimension;
+            model.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+            scene.add(model);
+            
+            // Fade out loader UI
+            loaderEl.style.opacity = 0;
+            setTimeout(() => { loaderEl.style.display = 'none'; }, 500);
+
+            // Initialize time block and begin looping
+            settleStartTime = performance.now();
+            animate(settleStartTime);
+          },
+          undefined,
+          function (error) {
+            console.warn("GLB model failed to load or is not present. Loading premium structural wireframe fallback.");
+            loaderEl.style.display = 'none';
+            errorEl.style.display = 'flex';
+            
+            // Build the visual placeholder inside viewer
+            createFallbackStructure();
+          }
+        );
+
+        window.addEventListener('resize', onWindowResize);
+      }
+
+      // Elegant structural geometric wireframe fallback if .glb is absent
+      function createFallbackStructure() {
+        const bottleGeometry = new THREE.BoxGeometry(0.9, 1.8, 0.6);
+        const bottleMaterial = new THREE.MeshStandardMaterial({
+          color: 0x111111,
+          roughness: 0.1,
+          metalness: 0.1,
+          transparent: true,
+          opacity: 0.08
+        });
+
+        const bottleMesh = new THREE.Mesh(bottleGeometry, bottleMaterial);
+        
+        // Outline geometry using red accent color
+        const edgeGeometry = new THREE.EdgesGeometry(bottleGeometry);
+        const edgeLine = new THREE.LineSegments(
+          edgeGeometry, 
+          new THREE.LineBasicMaterial({ color: 0xD91E1E, linewidth: 1.5 })
+        );
+
+        // Add a smaller cap structure on top
+        const capGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.4);
+        const capMesh = new THREE.Mesh(capGeometry, bottleMaterial);
+        capMesh.position.y = 1.1; // stack on top of base
+        
+        const capEdges = new THREE.EdgesGeometry(capGeometry);
+        const capLine = new THREE.LineSegments(
+          capEdges,
+          new THREE.LineBasicMaterial({ color: 0x111111 })
+        );
+        capLine.position.y = 1.1;
+
+        model = new THREE.Group();
+        model.add(bottleMesh);
+        model.add(edgeLine);
+        model.add(capMesh);
+        model.add(capLine);
+        
+        scene.add(model);
+
+        settleStartTime = performance.now();
+        animate(settleStartTime);
+      }
+
+      // RENDER LOOP & SETTLE INTERACTION
+      function animate(timestamp) {
+        animationFrameId = requestAnimationFrame(animate);
+
+        if (model) {
+          if (isSettling) {
+            const elapsed = timestamp - settleStartTime;
+            const progress = Math.min(elapsed / settleDuration, 1);
+
+            // Cubic ease-out calculation: f(t) = 1 - (1 - t)^3
+            const easeFactor = 1 - Math.pow(1 - progress, 3);
+            
+            // 2 full turns equals exactly 4 * PI radians
+            model.rotation.y = easeFactor * (4 * Math.PI);
+
+            if (progress === 1) {
+              isSettling = false;
+              controls.enabled = true; // Settle finished, hand control to reader
+            }
+          } else {
+            // Apply OrbitControls damping and update camera position
+            controls.update();
+          }
+        }
+
+        renderer.render(scene, camera);
+      }
+
+      function onWindowResize() {
+        if (!camera || !renderer) return;
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+      }
+
+      // Fire Three.js load sequence
+      init();
+    });
+  </script>
+</body>
+</html>
