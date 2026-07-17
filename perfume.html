@@ -265,6 +265,25 @@
       letter-spacing: 0;
     }
 
+    .viewer-hint {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666666;
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-weight: 500;
+    }
+
+    .viewer-hint svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+    }
+
     /* PRODUCT GRID */
     .product-grid {
       display: grid;
@@ -537,15 +556,31 @@
       <div id="canvas-holder"></div>
     </div>
 
+    <div class="viewer-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path
+          d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+        </path>
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+      </svg>
+      Drag to rotate 3D model
+    </div>
+
     <!-- MOBILE 3D SLIDER (Only visible on small screens) -->
     <div class="slider-container">
       <div class="slider-track" id="slider-track">
-        <div class="slider-item"><img src="perfume_blue.png" alt="Adeeb Blue" onerror="this.style.display='none';">
+        <div class="slider-item"><img src="perfume_blue_white.png" alt="Adeeb Blue"
+            onerror="this.style.display='none';">
         </div>
-        <div class="slider-item"><img src="perfume_green.png" alt="Adeeb Green" onerror="this.style.display='none';">
+        <div class="slider-item"><img src="perfume_green_white.png" alt="Adeeb Green"
+            onerror="this.style.display='none';">
         </div>
-        <div class="slider-item"><img src="perfume_red.png" alt="Adeeb Red" onerror="this.style.display='none';"></div>
-        <div class="slider-item"><img src="perfume_red2.png" alt="Adeeb Red 2" onerror="this.style.display='none';">
+        <div class="slider-item"><img src="perfume_red_white.png" alt="Adeeb Red" onerror="this.style.display='none';">
+        </div>
+        <div class="slider-item"><img src="perfume_red2_white.png" alt="Adeeb Red 2"
+            onerror="this.style.display='none';">
         </div>
       </div>
     </div>
@@ -561,7 +596,7 @@
             <span>Adeeb Blue</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_blue.png" alt="Adeeb Blue product shot" style="display: none;"
+          <img src="perfume_blue_white.png" alt="Adeeb Blue product shot" style="display: none;"
             onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-1').style.display='none'; document.getElementById('frame-1').style.aspectRatio='auto'; document.getElementById('frame-1').style.backgroundColor='transparent';"
             onerror="this.style.display='none';">
         </div>
@@ -575,7 +610,7 @@
             <span>Adeeb Green</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_green.png" alt="Adeeb Green product shot" style="display: none;"
+          <img src="perfume_green_white.png" alt="Adeeb Green product shot" style="display: none;"
             onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-2').style.display='none'; document.getElementById('frame-2').style.aspectRatio='auto'; document.getElementById('frame-2').style.backgroundColor='transparent';"
             onerror="this.style.display='none';">
         </div>
@@ -589,7 +624,7 @@
             <span>Adeeb Red</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_red.png" alt="Adeeb Red product shot" style="display: none;"
+          <img src="perfume_red_white.png" alt="Adeeb Red product shot" style="display: none;"
             onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-3').style.display='none'; document.getElementById('frame-3').style.aspectRatio='auto'; document.getElementById('frame-3').style.backgroundColor='transparent';"
             onerror="this.style.display='none';">
         </div>
@@ -603,7 +638,7 @@
             <span>Adeeb Red 2</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_red2.png" alt="Adeeb Red 2 product shot" style="display: none;"
+          <img src="perfume_red2_white.png" alt="Adeeb Red 2 product shot" style="display: none;"
             onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-4').style.display='none'; document.getElementById('frame-4').style.aspectRatio='auto'; document.getElementById('frame-4').style.backgroundColor='transparent';"
             onerror="this.style.display='none';">
         </div>
@@ -616,7 +651,7 @@
     <a href="https://dominal.in" target="_blank" rel="noopener noreferrer" class="footer-dominal"
       style="text-decoration: none; gap: 0.25rem;">
       <span>Built by Dominal</span>
-      <img src="dominallogo.png" alt="Dominal Logo" style="height: 2em; width: auto;">
+      <img src="dominallogo.jpeg" alt="Dominal Logo" style="height: 2em; width: auto;">
     </a>
   </footer>
 
