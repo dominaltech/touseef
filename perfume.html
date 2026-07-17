@@ -342,7 +342,7 @@
       height: 100%;
       position: absolute;
       transform-style: preserve-3d;
-      transition: transform 0.8s var(--transition-ease);
+      /* removed transition for smooth requestAnimationFrame */
     }
 
     .slider-item {
@@ -529,7 +529,7 @@
           <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
         <p>Interactive 3D Preview</p>
-        <p class="error-subtext">A structural wireframe is rendering. Please place <strong>3dmodel2.glb</strong> in the
+        <p class="error-subtext">A structural wireframe is rendering. Please place <strong>3dmodel1.glb</strong> in the
           root folder to display the full material.</p>
       </div>
 
@@ -652,13 +652,13 @@
 
         let currentAngle = 0;
 
-        // Initial setup
-        track.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
-
-        setInterval(() => {
-          currentAngle -= theta;
+        function rotateSlider() {
+          currentAngle -= 0.3; // Continuous slow rotation speed
           track.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
-        }, 1500);
+          requestAnimationFrame(rotateSlider);
+        }
+
+        rotateSlider();
       }
     });
 
@@ -724,9 +724,9 @@
         // 6. Loading Model File
         const loader = new THREE.GLTFLoader();
 
-        // COMMENT: Make sure '3dmodel2.glb' is loaded. If it's missing, the loader triggers error callback.
+        // COMMENT: Make sure '3dmodel1.glb' is loaded. If it's missing, the loader triggers error callback.
         loader.load(
-          '3dmodel2.glb',
+          '3dmodel1.glb',
           function (gltf) {
             model = gltf.scene;
 
@@ -742,7 +742,7 @@
 
             // Scale to proportional viewer size
             const maxDimension = Math.max(size.x, size.y, size.z);
-            const targetHeight = 2.8;  // Increased from 1.8 to make bottle significantly bigger 
+            const targetHeight = 2.4;  // Adjusted to make bottle slightly smaller
             const scaleFactor = targetHeight / maxDimension;
             model.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
