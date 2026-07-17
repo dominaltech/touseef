@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perfume Brand | Adeeb De CME</title>
   <meta name="description" content="Explore Adeeb De CME, an exclusive perfume line curated by Touseef Shaikh.">
-  
+
   <!-- Modern grotesque Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +17,8 @@
     :root {
       --bg-color: #FFFFFF;
       --text-color: #111111;
-      --accent-color: #D91E1E; /* Deep executive red */
+      --accent-color: #D91E1E;
+      /* Deep executive red */
       --border-color: #111111;
       --border-color-light: #E0E0E0;
       --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -36,7 +38,7 @@
       pointer-events: none;
       background: #FFFFFF;
     }
-    
+
     .bg-shape {
       position: absolute;
       border-radius: 50%;
@@ -44,7 +46,7 @@
       opacity: 0.08;
       animation: float 25s infinite ease-in-out;
     }
-    
+
     .bg-shape-1 {
       width: 40vw;
       height: 40vw;
@@ -53,7 +55,7 @@
       left: -10vw;
       animation-duration: 25s;
     }
-    
+
     .bg-shape-2 {
       width: 50vw;
       height: 50vw;
@@ -63,7 +65,7 @@
       animation-delay: -5s;
       animation-duration: 32s;
     }
-    
+
     .bg-shape-3 {
       width: 30vw;
       height: 30vw;
@@ -74,14 +76,16 @@
       animation-duration: 20s;
       opacity: 0.04;
     }
-    
+
     @keyframes float {
       0% {
         transform: translate(0, 0) scale(1);
       }
+
       50% {
         transform: translate(8vw, 6vh) scale(1.05);
       }
+
       100% {
         transform: translate(0, 0) scale(1);
       }
@@ -140,7 +144,7 @@
       stroke-width: 1.5px;
       fill: none;
       transition: stroke var(--transition-speed) var(--transition-ease),
-                  transform var(--transition-speed) var(--transition-ease);
+        transform var(--transition-speed) var(--transition-ease);
     }
 
     .back-link:hover {
@@ -191,7 +195,8 @@
     }
 
     /* LOADING & ERROR STATES */
-    .viewer-loader, .viewer-error {
+    .viewer-loader,
+    .viewer-error {
       position: absolute;
       top: 0;
       left: 0;
@@ -217,7 +222,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .loader-text {
@@ -329,6 +336,7 @@
       position: relative;
       margin-bottom: 2rem;
     }
+
     .slider-track {
       width: 100%;
       height: 100%;
@@ -336,6 +344,7 @@
       transform-style: preserve-3d;
       transition: transform 0.8s var(--transition-ease);
     }
+
     .slider-item {
       position: absolute;
       width: 160px;
@@ -346,11 +355,12 @@
       justify-content: center;
       align-items: center;
     }
+
     .slider-item img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.08));
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.08));
     }
 
     /* FOOTER DOMINAL */
@@ -379,16 +389,17 @@
       right: 30px;
       width: 55px;
       height: 55px;
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
       z-index: 1000;
       transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
       color: #FFFFFF;
     }
+
     .floating-ig svg {
       width: 26px;
       height: 26px;
@@ -396,6 +407,7 @@
       stroke-width: 1.8;
       fill: none;
     }
+
     .floating-ig:hover {
       transform: translateY(-4px) scale(1.05);
       box-shadow: 0 8px 25px rgba(214, 36, 159, 0.4);
@@ -464,15 +476,18 @@
       }
 
       .product-grid {
-        display: none; /* Hidden on mobile in favor of slider */
+        display: none;
+        /* Hidden on mobile in favor of slider */
       }
 
       .slider-container {
-        display: block; /* Show mobile slider */
+        display: block;
+        /* Show mobile slider */
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Elegant background animation elements -->
@@ -497,7 +512,7 @@
 
   <!-- Perfume Brand Page Main Content -->
   <main>
-    
+
     <!-- 3D Perfume Bottle Viewer -->
     <div class="viewer-container">
       <!-- Loading state -->
@@ -514,7 +529,8 @@
           <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
         <p>Interactive 3D Preview</p>
-        <p class="error-subtext">A structural wireframe is rendering. Please place <strong>3dmodel1.glb</strong> in the root folder to display the full material.</p>
+        <p class="error-subtext">A structural wireframe is rendering. Please place <strong>3dmodel2.glb</strong> in the
+          root folder to display the full material.</p>
       </div>
 
       <!-- Three.js Canvas Holder -->
@@ -524,10 +540,13 @@
     <!-- MOBILE 3D SLIDER (Only visible on small screens) -->
     <div class="slider-container">
       <div class="slider-track" id="slider-track">
-        <div class="slider-item"><img src="perfume_blue.png" alt="Adeeb Blue" onerror="this.style.display='none';"></div>
-        <div class="slider-item"><img src="perfume_green.png" alt="Adeeb Green" onerror="this.style.display='none';"></div>
+        <div class="slider-item"><img src="perfume_blue.png" alt="Adeeb Blue" onerror="this.style.display='none';">
+        </div>
+        <div class="slider-item"><img src="perfume_green.png" alt="Adeeb Green" onerror="this.style.display='none';">
+        </div>
         <div class="slider-item"><img src="perfume_red.png" alt="Adeeb Red" onerror="this.style.display='none';"></div>
-        <div class="slider-item"><img src="perfume_red2.png" alt="Adeeb Red 2" onerror="this.style.display='none';"></div>
+        <div class="slider-item"><img src="perfume_red2.png" alt="Adeeb Red 2" onerror="this.style.display='none';">
+        </div>
       </div>
     </div>
 
@@ -542,7 +561,9 @@
             <span>Adeeb Blue</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_blue.png" alt="Adeeb Blue product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-1').style.display='none'; document.getElementById('frame-1').style.aspectRatio='auto'; document.getElementById('frame-1').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+          <img src="perfume_blue.png" alt="Adeeb Blue product shot" style="display: none;"
+            onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-1').style.display='none'; document.getElementById('frame-1').style.aspectRatio='auto'; document.getElementById('frame-1').style.backgroundColor='transparent';"
+            onerror="this.style.display='none';">
         </div>
       </div>
 
@@ -554,7 +575,9 @@
             <span>Adeeb Green</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_green.png" alt="Adeeb Green product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-2').style.display='none'; document.getElementById('frame-2').style.aspectRatio='auto'; document.getElementById('frame-2').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+          <img src="perfume_green.png" alt="Adeeb Green product shot" style="display: none;"
+            onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-2').style.display='none'; document.getElementById('frame-2').style.aspectRatio='auto'; document.getElementById('frame-2').style.backgroundColor='transparent';"
+            onerror="this.style.display='none';">
         </div>
       </div>
 
@@ -566,7 +589,9 @@
             <span>Adeeb Red</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_red.png" alt="Adeeb Red product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-3').style.display='none'; document.getElementById('frame-3').style.aspectRatio='auto'; document.getElementById('frame-3').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+          <img src="perfume_red.png" alt="Adeeb Red product shot" style="display: none;"
+            onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-3').style.display='none'; document.getElementById('frame-3').style.aspectRatio='auto'; document.getElementById('frame-3').style.backgroundColor='transparent';"
+            onerror="this.style.display='none';">
         </div>
       </div>
 
@@ -578,7 +603,9 @@
             <span>Adeeb Red 2</span>
             <span style="font-size: 0.55rem; margin-top: 0.4rem; opacity: 0.6;">Image Placeholder</span>
           </div>
-          <img src="perfume_red2.png" alt="Adeeb Red 2 product shot" style="display: none;" onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-4').style.display='none'; document.getElementById('frame-4').style.aspectRatio='auto'; document.getElementById('frame-4').style.backgroundColor='transparent';" onerror="this.style.display='none';">
+          <img src="perfume_red2.png" alt="Adeeb Red 2 product shot" style="display: none;"
+            onload="this.style.display='block'; this.classList.add('loaded'); document.getElementById('fallback-4').style.display='none'; document.getElementById('frame-4').style.aspectRatio='auto'; document.getElementById('frame-4').style.backgroundColor='transparent';"
+            onerror="this.style.display='none';">
         </div>
       </div>
 
@@ -586,14 +613,16 @@
   </main>
 
   <footer>
-    <a href="https://dominal.in" target="_blank" rel="noopener noreferrer" class="footer-dominal" style="text-decoration: none; gap: 0.25rem;">
+    <a href="https://dominal.in" target="_blank" rel="noopener noreferrer" class="footer-dominal"
+      style="text-decoration: none; gap: 0.25rem;">
       <span>Built by Dominal</span>
       <img src="dominallogo.png" alt="Dominal Logo" style="height: 2em; width: auto;">
     </a>
   </footer>
 
   <!-- Floating Instagram Button -->
-  <a href="https://www.instagram.com/adeebperfumescme" target="_blank" rel="noopener noreferrer" class="floating-ig" aria-label="Instagram">
+  <a href="https://www.instagram.com/adeebperfumescme" target="_blank" rel="noopener noreferrer" class="floating-ig"
+    aria-label="Instagram">
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -616,13 +645,13 @@
         const theta = 360 / total;
         // Calculate radius to push items outward so they don't overlap
         const radius = Math.round((160 / 2) / Math.tan(Math.PI / total)) + 30; // approx 110px
-        
+
         items.forEach((item, index) => {
           item.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
         });
 
         let currentAngle = 0;
-        
+
         // Initial setup
         track.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
 
@@ -670,11 +699,11 @@
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.enableZoom = false; // Prevent unwanted zooming while scrolling the page
-        
+
         // Limits to prevent flipping model upside down
         controls.minPolarAngle = Math.PI / 3; // Limit vertical tilt upwards
         controls.maxPolarAngle = Math.PI * 2 / 3; // Limit vertical tilt downwards
-        
+
         // Disable controls immediately during the auto-rotation settle phase
         controls.enabled = false;
 
@@ -694,10 +723,10 @@
 
         // 6. Loading Model File
         const loader = new THREE.GLTFLoader();
-        
-        // COMMENT: Make sure '3dmodel1.glb' is loaded. If it's missing, the loader triggers error callback.
+
+        // COMMENT: Make sure '3dmodel2.glb' is loaded. If it's missing, the loader triggers error callback.
         loader.load(
-          '3dmodel1.glb',
+          '3dmodel2.glb',
           function (gltf) {
             model = gltf.scene;
 
@@ -718,7 +747,7 @@
             model.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
             scene.add(model);
-            
+
             // Fade out loader UI
             loaderEl.style.opacity = 0;
             setTimeout(() => { loaderEl.style.display = 'none'; }, 500);
@@ -732,7 +761,7 @@
             console.warn("GLB model failed to load or is not present. Loading premium structural wireframe fallback.");
             loaderEl.style.display = 'none';
             errorEl.style.display = 'flex';
-            
+
             // Build the visual placeholder inside viewer
             createFallbackStructure();
           }
@@ -753,11 +782,11 @@
         });
 
         const bottleMesh = new THREE.Mesh(bottleGeometry, bottleMaterial);
-        
+
         // Outline geometry using red accent color
         const edgeGeometry = new THREE.EdgesGeometry(bottleGeometry);
         const edgeLine = new THREE.LineSegments(
-          edgeGeometry, 
+          edgeGeometry,
           new THREE.LineBasicMaterial({ color: 0xD91E1E, linewidth: 1.5 })
         );
 
@@ -765,7 +794,7 @@
         const capGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.4);
         const capMesh = new THREE.Mesh(capGeometry, bottleMaterial);
         capMesh.position.y = 1.1; // stack on top of base
-        
+
         const capEdges = new THREE.EdgesGeometry(capGeometry);
         const capLine = new THREE.LineSegments(
           capEdges,
@@ -778,7 +807,7 @@
         model.add(edgeLine);
         model.add(capMesh);
         model.add(capLine);
-        
+
         scene.add(model);
 
         settleStartTime = performance.now();
@@ -796,7 +825,7 @@
 
             // Cubic ease-out calculation: f(t) = 1 - (1 - t)^3
             const easeFactor = 1 - Math.pow(1 - progress, 3);
-            
+
             // 2 full turns equals exactly 4 * PI radians
             model.rotation.y = easeFactor * (4 * Math.PI);
 
@@ -825,4 +854,5 @@
     });
   </script>
 </body>
+
 </html>
