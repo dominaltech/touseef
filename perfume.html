@@ -77,16 +77,13 @@
     
     @keyframes float {
       0% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate(0, 0) scale(1);
       }
-      33% {
-        transform: translate(3vw, 5vh) rotate(120deg);
-      }
-      66% {
-        transform: translate(-2vw, 2vh) rotate(240deg);
+      50% {
+        transform: translate(8vw, 6vh) scale(1.05);
       }
       100% {
-        transform: translate(0, 0) rotate(360deg);
+        transform: translate(0, 0) scale(1);
       }
     }
 
@@ -323,6 +320,87 @@
       }
     }
 
+    /* MOBILE SLIDER STYLES */
+    .slider-container {
+      display: none;
+      perspective: 1200px;
+      width: 100%;
+      height: 280px;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .slider-track {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transition: transform 0.8s var(--transition-ease);
+    }
+    .slider-item {
+      position: absolute;
+      width: 160px;
+      height: 260px;
+      left: 50%;
+      margin-left: -80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .slider-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.08));
+    }
+
+    /* FOOTER DOMINAL */
+    .footer-dominal {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+    }
+
+    .footer-dominal img {
+      height: 4em;
+      width: auto;
+    }
+
+
+
+    /* FLOATING INSTAGRAM BUTTON */
+    .floating-ig {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 55px;
+      height: 55px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
+      color: #FFFFFF;
+    }
+    .floating-ig svg {
+      width: 26px;
+      height: 26px;
+      stroke: #FFFFFF;
+      stroke-width: 1.8;
+      fill: none;
+    }
+    .floating-ig:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(214, 36, 159, 0.4);
+    }
+
     /* FOOTER */
     footer {
       width: 100%;
@@ -386,8 +464,11 @@
       }
 
       .product-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: none; /* Hidden on mobile in favor of slider */
+      }
+
+      .slider-container {
+        display: block; /* Show mobile slider */
       }
     }
   </style>
@@ -438,6 +519,16 @@
 
       <!-- Three.js Canvas Holder -->
       <div id="canvas-holder"></div>
+    </div>
+
+    <!-- MOBILE 3D SLIDER (Only visible on small screens) -->
+    <div class="slider-container">
+      <div class="slider-track" id="slider-track">
+        <div class="slider-item"><img src="perfume_blue.png" alt="Adeeb Blue" onerror="this.style.display='none';"></div>
+        <div class="slider-item"><img src="perfume_green.png" alt="Adeeb Green" onerror="this.style.display='none';"></div>
+        <div class="slider-item"><img src="perfume_red.png" alt="Adeeb Red" onerror="this.style.display='none';"></div>
+        <div class="slider-item"><img src="perfume_red2.png" alt="Adeeb Red 2" onerror="this.style.display='none';"></div>
+      </div>
     </div>
 
     <!-- Product Showcase Grid (Exactly 4 Items) -->
@@ -494,18 +585,21 @@
     </section>
   </main>
 
-  <!-- Perfume Footer -->
   <footer>
-    <!-- COMMENT: Replace instagram URL and handle -->
-    <a href="https://instagram.com/touseefshaikh" target="_blank" rel="noopener noreferrer" class="social-link">
-      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-      </svg>
-      <span>@touseefshaikh</span>
+    <a href="https://dominal.in" target="_blank" rel="noopener noreferrer" class="footer-dominal" style="text-decoration: none; gap: 0.25rem;">
+      <span>Built by Dominal</span>
+      <img src="dominallogo.png" alt="Dominal Logo" style="height: 2em; width: auto;">
     </a>
   </footer>
+
+  <!-- Floating Instagram Button -->
+  <a href="https://www.instagram.com/adeebperfumescme" target="_blank" rel="noopener noreferrer" class="floating-ig" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  </a>
 
   <!-- CDN scripts for Three.js, GLTFLoader and OrbitControls -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -513,6 +607,32 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
   <script>
+    // MOBILE 3D SLIDER LOGIC
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.getElementById('slider-track');
+      if (track) {
+        const items = track.querySelectorAll('.slider-item');
+        const total = items.length;
+        const theta = 360 / total;
+        // Calculate radius to push items outward so they don't overlap
+        const radius = Math.round((160 / 2) / Math.tan(Math.PI / total)) + 30; // approx 110px
+        
+        items.forEach((item, index) => {
+          item.style.transform = `rotateY(${index * theta}deg) translateZ(${radius}px)`;
+        });
+
+        let currentAngle = 0;
+        
+        // Initial setup
+        track.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+
+        setInterval(() => {
+          currentAngle -= theta;
+          track.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+        }, 1500);
+      }
+    });
+
     // 3D VIEWER SYSTEM WITH INTRO SETTLE ANIMATION AND DRIFT CONTROLS
     document.addEventListener('DOMContentLoaded', () => {
       let scene, camera, renderer, controls, model;
@@ -540,7 +660,7 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.5; // Increased exposure
+        renderer.toneMappingExposure = 2.0; // Increased exposure (brighter)
         renderer.outputEncoding = THREE.sRGBEncoding; // Fixes dark GLTF rendering
 
         container.appendChild(renderer.domElement);
@@ -559,11 +679,11 @@
         controls.enabled = false;
 
         // 5. Studio Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 2.0); // Brighter ambient
+        const ambientLight = new THREE.AmbientLight(0xffffff, 3.0); // Brighter ambient
         scene.add(ambientLight);
 
         // Main key directional light
-        const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        const mainLight = new THREE.DirectionalLight(0xffffff, 3.5);
         mainLight.position.set(4, 8, 15);
         scene.add(mainLight);
 
@@ -593,7 +713,7 @@
 
             // Scale to proportional viewer size
             const maxDimension = Math.max(size.x, size.y, size.z);
-            const targetHeight = 1.8; 
+            const targetHeight = 2.8;  // Increased from 1.8 to make bottle significantly bigger 
             const scaleFactor = targetHeight / maxDimension;
             model.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
